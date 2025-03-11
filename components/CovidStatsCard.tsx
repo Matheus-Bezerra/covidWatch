@@ -8,23 +8,38 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns/format";
 import { ptBR } from 'date-fns/locale'
 import { CalendarIcon, Trash } from "lucide-react";
+import { fetchCovidData, fetchCovidDataWithDate, CovidData } from "@/lib/fetchCovidBrazilData";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface CovidStatsCardProps {
-    data: {
-        confirmed: number | null;
-        deaths: number | null;
-        recovered: number | null;
-    };
+    data: CovidData;
 }
 
 export const CovidStatsCard: React.FC<CovidStatsCardProps> = ({ data }) => {
     const [date, setDate] = useState<Date | undefined>(undefined);
+    const [covidData, setCovidData] = useState<CovidData>(data);
 
     const formatNumber = (number: number | null) => {
         if (number === null || number === undefined) {
             return "-";
         }
         return new Intl.NumberFormat('pt-BR').format(number);
+    };
+
+    const handleDateChange = async (newDate: Date | undefined) => {
+        setDate(newDate);
+        if (newDate) {
+            const formattedDate = format(newDate, "yyyyMMdd");
+            const newData = await fetchCovidDataWithDate(formattedDate);
+            if (newData) {
+                setCovidData(newData);
+            }
+        } else {
+            const initialData = await fetchCovidData();
+            if (initialData) {
+                setCovidData(initialData);
+            }
+        }
     };
 
     return (
@@ -55,16 +70,23 @@ export const CovidStatsCard: React.FC<CovidStatsCardProps> = ({ data }) => {
                                 <Calendar
                                     mode="single"
                                     selected={date}
-                                    onSelect={(newDate) => {
-                                        setDate(newDate)
-                                    }}
+                                    onSelect={handleDateChange}
                                     initialFocus
                                 />
                             </PopoverContent>
                         </Popover>
-                        <Button variant={"outline"} size={"icon"}>
-                            <Trash />
-                        </Button>
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    <Button variant={"outline"} size={"icon"} onClick={() => handleDateChange(undefined)} className="cursor-pointer">
+                                        <Trash />
+                                    </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <p>Limpar data</p>
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
                     </div>
                 </div>
             </CardHeader>
@@ -75,24 +97,24 @@ export const CovidStatsCard: React.FC<CovidStatsCardProps> = ({ data }) => {
                             <p className="text-muted-foreground">Casos Confirmados</p>
                             <div className="h-3 w-3 bg-green-500 rounded-full"></div>
                         </div>
-                        <h2 className="text-xl font-bod">{formatNumber(data.confirmed)}</h2>
+                        <h2 className="text-xl font-bod">{formatNumber(covidData.confirmed)}</h2>
                     </div>
                     <div>
                         <div className="flex gap-1.5 items-center">
                             <p className="text-muted-foreground">Casos Suspeitos</p>
                             <div className="h-3 w-3 bg-yellow-500 rounded-full"></div>
                         </div>
-                        <h2 className="text-xl font-bod">{formatNumber(data.recovered)}</h2>
+                        <h2 className="text-xl font-bod">{formatNumber(covidData.recovered)}</h2>
                     </div>
                     <div>
                         <div className="flex gap-1.5 items-center">
                             <p className="text-muted-foreground">Óbitos Confirmados</p>
                             <div className="h-3 w-3 bg-red-500 rounded-full"></div>
                         </div>
-                        <h2 className="text-xl font-bod">{formatNumber(data.deaths)}</h2>
+                        <h2 className="text-xl font-bod">{formatNumber(covidData.deaths)}</h2>
                     </div>
                 </div>
             </CardContent>
-        </Card>
+        </Card >
     );
 }
