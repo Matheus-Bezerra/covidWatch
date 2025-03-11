@@ -1,5 +1,5 @@
 "use client"
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,11 +10,23 @@ import { ptBR } from 'date-fns/locale'
 import { CalendarIcon, Trash } from "lucide-react";
 
 interface CovidStatsCardProps {
-    date: Date | undefined;
-    setDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
+    data: {
+        confirmed: number | null;
+        deaths: number | null;
+        recovered: number | null;
+    };
 }
 
-export const CovidStatsCard: React.FC<CovidStatsCardProps> = ({ date, setDate }) => {
+export const CovidStatsCard: React.FC<CovidStatsCardProps> = ({ data }) => {
+    const [date, setDate] = useState<Date | undefined>(undefined);
+
+    const formatNumber = (number: number | null) => {
+        if (number === null || number === undefined) {
+            return "-";
+        }
+        return new Intl.NumberFormat('pt-BR').format(number);
+    };
+
     return (
         <Card>
             <CardHeader>
@@ -63,21 +75,21 @@ export const CovidStatsCard: React.FC<CovidStatsCardProps> = ({ date, setDate })
                             <p className="text-muted-foreground">Casos Confirmados</p>
                             <div className="h-3 w-3 bg-green-500 rounded-full"></div>
                         </div>
-                        <h2 className="text-xl font-bod">384.000</h2>
+                        <h2 className="text-xl font-bod">{formatNumber(data.confirmed)}</h2>
                     </div>
                     <div>
                         <div className="flex gap-1.5 items-center">
                             <p className="text-muted-foreground">Casos Suspeitos</p>
                             <div className="h-3 w-3 bg-yellow-500 rounded-full"></div>
                         </div>
-                        <h2 className="text-xl font-bod">384.000</h2>
+                        <h2 className="text-xl font-bod">{formatNumber(data.recovered)}</h2>
                     </div>
                     <div>
                         <div className="flex gap-1.5 items-center">
                             <p className="text-muted-foreground">Óbitos Confirmados</p>
                             <div className="h-3 w-3 bg-red-500 rounded-full"></div>
                         </div>
-                        <h2 className="text-xl font-bod">384.000</h2>
+                        <h2 className="text-xl font-bod">{formatNumber(data.deaths)}</h2>
                     </div>
                 </div>
             </CardContent>

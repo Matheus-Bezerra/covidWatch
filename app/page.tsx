@@ -1,16 +1,16 @@
-"use client"
-import React, { useState } from "react";
+import React from "react";
 import { DataTableDemo } from "@/components/DatatablePaises";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { CovidStatsCard } from "@/components/CovidStatsCard";
+import { fetchCovidData } from "@/lib/fetchCovidBrazilData";
 
-const Home: React.FC = () => {
-  const [date, setDate] = useState<Date | undefined>(undefined);
+export default async function Home() {
+  const data = await fetchCovidData() || { confirmed: null, deaths: null, recovered: null };
 
   return (
     <main className="">
       <div className="grid gap-4">
-        <CovidStatsCard date={date} setDate={setDate} />
+        <CovidStatsCard data={data} />
         <div className="grid grid-cols-[70%_30%] gap-4">
           <Card>
             <CardHeader>
@@ -39,5 +39,3 @@ const Home: React.FC = () => {
     </main>
   );
 }
-
-export default Home;
