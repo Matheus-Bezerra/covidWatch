@@ -17,7 +17,7 @@ export const CovidCharts: React.FC = () => {
     console.log("sStates data ", statesData)
 
     return (
-        <div style={{ width: '100%', height: 300, overflowY: 'auto' }}>
+        <div className= "w-full h-96 overflow-y-auto">
             <ResponsiveContainer width="100%" height={statesData.length * 50}>
                 <BarChart
                     data={statesData.map((state, index) => ({ ...state, key: `${state.uf}-${index}` }))}
