@@ -42,3 +42,18 @@ export async function fetchCovidDataWithDate(date: string): Promise<CovidData | 
     return null;
   }
 }
+
+export async function fetchCovidStates(): Promise<StateData[]> {
+  try {
+    const response = await api.get("/report/v1");
+    return response.data.data.map((state: StateData) => ({
+      uf: state.uf,
+      cases: state.cases,
+      deaths: state.deaths,
+      suspects: state.suspects,
+    }));
+  } catch (error) {
+    console.error("Erro ao buscar dados da API:", error);
+    return [];
+  }
+}

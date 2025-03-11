@@ -1,8 +1,9 @@
 import React from "react";
-import { DataTableDemo } from "@/components/DatatablePaises";
+import { DataTablePaises } from "@/components/DatatablePaises";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { CovidStatsCard } from "@/components/CovidStatsCard";
 import { fetchCovidData } from "@/lib/fetchCovidBrazilData";
+import { CovidCharts } from "@/components/CovidCharts";
 
 export default async function Home() {
   const data = await fetchCovidData() || { confirmed: null, deaths: null, recovered: null };
@@ -20,7 +21,7 @@ export default async function Home() {
               <CardDescription>Acompanhe os casos da pandemia nos estados do país.</CardDescription>
             </CardHeader>
             <CardContent>
-              <DataTableDemo />
+              <CovidCharts />
             </CardContent>
           </Card>
           <Card>
@@ -31,7 +32,7 @@ export default async function Home() {
               <CardDescription>Status de casos de Covid em todos os países</CardDescription>
             </CardHeader>
             <CardContent>
-              <DataTableDemo />
+              <DataTablePaises />
             </CardContent>
           </Card>
         </div>
