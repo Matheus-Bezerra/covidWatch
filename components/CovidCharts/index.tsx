@@ -1,9 +1,9 @@
 "use client"
 import React, { useEffect, useState } from "react";
-import { fetchCovidStates, StateData } from "@/lib/fetchCovidBrazilData";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, TooltipProps } from "recharts";
 import { Input } from "@/components/ui/input";
 import { ValueType, NameType } from 'recharts/types/component/DefaultTooltipContent';
+import { fetchCovidStates, StateData } from "@/lib/services/covidService";
 
 const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>) => {
     if (active && payload && payload.length) {
@@ -48,7 +48,7 @@ export const CovidCharts: React.FC = () => {
     return (
         <div className="w-full h-96 overflow-y-auto pr-3">
             <Input
-                placeholder="Pesquisar estado"
+                placeholder="Procurar estado por sigla ou nome"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="mb-4"
@@ -61,10 +61,10 @@ export const CovidCharts: React.FC = () => {
                 >
                     <XAxis type="number" scale="log" domain={['auto', 'auto']} />
                     <YAxis dataKey="uf" type="category" width={100} />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Bar dataKey="cases" fill="#22c55e" name="Casos Confirmados" />
-                    <Bar dataKey="deaths" fill="#ef4444" name="Mortes" />
-                    <Bar dataKey="suspects" fill="#eab308" name="Casos Suspeitos" barSize={15} />
+                    <Tooltip content={<CustomTooltip />} cursor={false} /> {/* Disable cursor background fill */}
+                    <Bar dataKey="cases" fill="#22c55e" name="Casos Confirmados" radius={[6, 6, 6, 6]} />
+                    <Bar dataKey="deaths" fill="#ef4444" name="Mortes" radius={[6, 6, 6, 6]} />
+                    <Bar dataKey="suspects" fill="#eab308" name="Casos Suspeitos" radius={[6, 6, 6, 6]} />
                 </BarChart>
             </ResponsiveContainer>
         </div>

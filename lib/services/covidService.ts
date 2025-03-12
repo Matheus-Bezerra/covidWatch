@@ -1,4 +1,4 @@
-import { api } from "./api";
+import { api } from "@/lib/api/api";
 
 export interface CovidData {
   confirmed: number | null;
@@ -16,6 +16,18 @@ export interface StateData {
   refuses: number;
   datetime: string;
 }
+
+export interface CountryData {
+    country: string;
+    confirmed: number;
+    deaths: number;
+    suspects: number;
+  }
+
+  
+interface ApiCovidCountryResponse {
+    data: CountryData[];
+  }
 
 export async function fetchCovidData(): Promise<CovidData | null> {
   try {
@@ -58,3 +70,19 @@ export async function fetchCovidStates(): Promise<StateData[]> {
     return [];
   }
 }
+  
+  export async function fetchCovidCountriesData(): Promise<CountryData[]> {
+    try {
+      const response = await api.get<ApiCovidCountryResponse>("report/v1/countries");
+      return response.data.data.map((country) => ({
+        country: country.country,
+        confirmed: country.confirmed,
+        deaths: country.deaths,
+        suspects: country.suspects,
+      }));
+    } catch (error) {
+      console.error("Erro ao buscar dados da API:", error);
+      return [];
+    }
+  }
+  

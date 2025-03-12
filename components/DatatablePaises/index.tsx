@@ -41,7 +41,7 @@ export type CountryData = {
 export const columns: ColumnDef<CountryData>[] = [
     {
         accessorKey: "country",
-        header:  () => (
+        header: () => (
             <div className="flex gap-1.5 items-center">
                 <span>Países</span>
                 <Globe className="h-4 w-4" />
@@ -89,6 +89,13 @@ export const columns: ColumnDef<CountryData>[] = [
     },
 ];
 
+const columnLabels: { [key: string]: string } = {
+    country: "Países",
+    confirmed: "Casos Confirmados",
+    deaths: "Óbitos",
+    suspects: "Suspeitos",
+};
+
 export function DataTablePaises({ data }: { data: CountryData[] }) {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
@@ -115,10 +122,10 @@ export function DataTablePaises({ data }: { data: CountryData[] }) {
     });
 
     return (
-        <div className= "w-full h-96 overflow-y-auto pr-3">
+        <div className="w-full h-96 overflow-y-auto pr-3">
             <div className="flex items-center py-4">
                 <Input
-                    placeholder="Pesquisar país"
+                    placeholder="Procurar País"
                     value={(table.getColumn("country")?.getFilterValue() as string) ?? ""}
                     onChange={(event) =>
                         table.getColumn("country")?.setFilterValue(event.target.value)
@@ -145,7 +152,7 @@ export function DataTablePaises({ data }: { data: CountryData[] }) {
                                             column.toggleVisibility(!!value)
                                         }
                                     >
-                                        {column.id}
+                                        {columnLabels[column.id] || column.id}
                                     </DropdownMenuCheckboxItem>
                                 )
                             })}

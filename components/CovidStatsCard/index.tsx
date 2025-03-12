@@ -8,8 +8,9 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns/format";
 import { ptBR } from 'date-fns/locale'
 import { CalendarIcon, Trash } from "lucide-react";
-import { fetchCovidData, fetchCovidDataWithDate, CovidData } from "@/lib/fetchCovidBrazilData";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { CovidData, fetchCovidData, fetchCovidDataWithDate } from "@/lib/services/covidService";
+import StatItem from "./StatItem";
 
 interface CovidStatsCardProps {
     data: CovidData;
@@ -18,13 +19,6 @@ interface CovidStatsCardProps {
 export const CovidStatsCard: React.FC<CovidStatsCardProps> = ({ data }) => {
     const [date, setDate] = useState<Date | undefined>(undefined);
     const [covidData, setCovidData] = useState<CovidData>(data);
-
-    const formatNumber = (number: number | null) => {
-        if (number === null || number === undefined) {
-            return "-";
-        }
-        return new Intl.NumberFormat('pt-BR').format(number);
-    };
 
     const handleDateChange = async (newDate: Date | undefined) => {
         setDate(newDate);
@@ -92,28 +86,10 @@ export const CovidStatsCard: React.FC<CovidStatsCardProps> = ({ data }) => {
                 </div>
             </CardHeader>
             <CardContent>
-                <div className="grid md:grid-cols-3 gap-8 justify-between">
-                    <div>
-                        <div className="flex gap-1.5 items-center">
-                            <p className="text-muted-foreground">Casos Confirmados</p>
-                            <div className="h-3 w-3 bg-green-500 rounded-full"></div>
-                        </div>
-                        <h2 className="text-xl font-bod">{formatNumber(covidData.confirmed)}</h2>
-                    </div>
-                    <div>
-                        <div className="flex gap-1.5 items-center">
-                            <p className="text-muted-foreground">Casos Suspeitos</p>
-                            <div className="h-3 w-3 bg-yellow-500 rounded-full"></div>
-                        </div>
-                        <h2 className="text-xl font-bod">{formatNumber(covidData.recovered)}</h2>
-                    </div>
-                    <div>
-                        <div className="flex gap-1.5 items-center">
-                            <p className="text-muted-foreground">Óbitos Confirmados</p>
-                            <div className="h-3 w-3 bg-red-500 rounded-full"></div>
-                        </div>
-                        <h2 className="text-xl font-bod">{formatNumber(covidData.deaths)}</h2>
-                    </div>
+                <div className="grid md:flex md:justify-between gap-8 justify-between">
+                    <StatItem label="Casos Confirmados" value={covidData.confirmed} className="bg-green-500" />
+                    <StatItem label="Casos Suspeitos" value={covidData.recovered} className="bg-yellow-500" />
+                    <StatItem label="Óbitos Confirmados" value={covidData.deaths} className="bg-red-500" />
                 </div>
             </CardContent>
         </Card >
