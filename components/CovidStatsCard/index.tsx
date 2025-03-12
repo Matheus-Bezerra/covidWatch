@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,32 +9,16 @@ import { format } from "date-fns/format";
 import { ptBR } from 'date-fns/locale'
 import { CalendarIcon, Trash } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { CovidData, fetchCovidData, fetchCovidDataWithDate } from "@/lib/services/covidService";
 import StatItem from "./StatItem";
+import { CovidData } from "@/lib/services/covidService";
+import { useCovidData } from "@/hooks/useCovidData";
 
 interface CovidStatsCardProps {
     data: CovidData;
 }
 
 export const CovidStatsCard: React.FC<CovidStatsCardProps> = ({ data }) => {
-    const [date, setDate] = useState<Date | undefined>(undefined);
-    const [covidData, setCovidData] = useState<CovidData>(data);
-
-    const handleDateChange = async (newDate: Date | undefined) => {
-        setDate(newDate);
-        if (newDate) {
-            const formattedDate = format(newDate, "yyyyMMdd");
-            const newData = await fetchCovidDataWithDate(formattedDate);
-            if (newData) {
-                setCovidData(newData);
-            }
-        } else {
-            const initialData = await fetchCovidData();
-            if (initialData) {
-                setCovidData(initialData);
-            }
-        }
-    };
+    const { date, covidData, handleDateChange } = useCovidData(data);
 
     return (
         <Card>
@@ -67,6 +51,7 @@ export const CovidStatsCard: React.FC<CovidStatsCardProps> = ({ data }) => {
                                     onSelect={handleDateChange}
                                     initialFocus
                                     locale={ptBR}
+                                    defaultMonth={new Date(2023, 2)} // Visualização inicial do calendário de Março de 2023 onde tem mais dados disponíveis
                                 />
                             </PopoverContent>
                         </Popover>
