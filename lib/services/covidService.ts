@@ -6,7 +6,7 @@ export interface CovidData {
   recovered: number | null;
 }
 
-export interface StateData {
+export interface CovidStateData {
   uid: number;
   uf: string;
   state: string;
@@ -42,11 +42,11 @@ export async function fetchCovidData(): Promise<CovidData | null> {
 export async function fetchCovidDataWithDate(date: string): Promise<CovidData | null> {
   try {
     const response = await api.get(`report/v1/brazil/${date}`);
-    const data: StateData[] = response.data.data;
+    const data: CovidStateData[] = response.data.data;
 
-    const confirmed = data.reduce((sum: number, state: StateData) => sum + state.cases, 0);
-    const deaths = data.reduce((sum: number, state: StateData) => sum + state.deaths, 0);
-    const recovered = data.reduce((sum: number, state: StateData) => sum + state.suspects, 0);
+    const confirmed = data.reduce((sum: number, state: CovidStateData) => sum + state.cases, 0);
+    const deaths = data.reduce((sum: number, state: CovidStateData) => sum + state.deaths, 0);
+    const recovered = data.reduce((sum: number, state: CovidStateData) => sum + state.suspects, 0);
 
     return { confirmed, deaths, recovered };
   } catch (error) {
@@ -55,10 +55,10 @@ export async function fetchCovidDataWithDate(date: string): Promise<CovidData | 
   }
 }
 
-export async function fetchCovidStates(): Promise<StateData[]> {
+export async function fetchCovidStates(): Promise<CovidStateData[]> {
   try {
     const response = await api.get("/report/v1");
-    return response.data.data.map((state: StateData) => ({
+    return response.data.data.map((state: CovidStateData) => ({
       uf: state.uf,
       state: state.state,
       cases: state.cases,

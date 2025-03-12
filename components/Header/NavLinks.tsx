@@ -7,7 +7,7 @@ export const NavLinks = () => {
     const pathname = usePathname();
 
     return (
-        <nav className="flex flex-wrap items-center space-x-5 lg:space-x-8">
+        <nav className="flex flex-wrap justify-center items-center space-x-5 lg:space-x-8">
             <Link href="/" className={`flex items-center gap-1 ${pathname === '/' ? 'font-bold' : ''}`}>
                 Início
             </Link>

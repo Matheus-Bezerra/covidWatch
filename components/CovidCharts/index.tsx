@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, TooltipProps } from "recharts";
 import { Input } from "@/components/ui/input";
 import { ValueType, NameType } from 'recharts/types/component/DefaultTooltipContent';
-import { fetchCovidStates, StateData } from "@/lib/services/covidService";
+import { fetchCovidStates, CovidStateData } from "@/lib/services/covidService";
 
 const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>) => {
     if (active && payload && payload.length) {
@@ -23,8 +23,8 @@ const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameT
 };
 
 export const CovidCharts: React.FC = () => {
-    const [statesData, setStatesData] = useState<StateData[]>([]);
-    const [filteredData, setFilteredData] = useState<StateData[]>([]);
+    const [statesData, setStatesData] = useState<CovidStateData[]>([]);
+    const [filteredData, setFilteredData] = useState<CovidStateData[]>([]);
     const [searchQuery, setSearchQuery] = useState<string>("");
 
     useEffect(() => {
