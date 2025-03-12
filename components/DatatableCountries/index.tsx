@@ -96,7 +96,7 @@ const columnLabels: { [key: string]: string } = {
     suspects: "Suspeitos",
 };
 
-export function DataTablePaises({ data }: { data: CountryData[] }) {
+export function DataTableCountries({ data }: { data: CountryData[] }) {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});

@@ -1,4 +1,4 @@
-import { DataTablePaises } from "@/components/DatatablePaises";
+import { DataTableCountries } from "@/components/DatatableCountries";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { CovidStatsCard } from "@/components/CovidStatsCard";
 import { CovidCharts } from "@/components/CovidCharts";
@@ -31,7 +31,7 @@ export default async function Home() {
             <CardDescription>Acompanhe a situação da pandemia em diferentes países</CardDescription>
           </CardHeader>
           <CardContent>
-            <DataTablePaises data={countriesData} />
+            <DataTableCountries data={countriesData} />
           </CardContent>
         </Card>
       </div>

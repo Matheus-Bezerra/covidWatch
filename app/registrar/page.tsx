@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { CovidCharts } from '@/components/CovidCharts';
 import { fetchGetStatesBrazil } from '@/lib/services/statesService';
 
-const RelatarPage = async () => {
+const RegistrarPage = async () => {
     const states = await fetchGetStatesBrazil()
 
     return (
@@ -27,4 +27,4 @@ const RelatarPage = async () => {
     );
 };
 
-export default RelatarPage;
+export default RegistrarPage;
