@@ -72,6 +72,7 @@ export const CovidStatsCard: React.FC<CovidStatsCardProps> = ({ data }) => {
                                     selected={date}
                                     onSelect={handleDateChange}
                                     initialFocus
+                                    locale={ptBR}
                                 />
                             </PopoverContent>
                         </Popover>
