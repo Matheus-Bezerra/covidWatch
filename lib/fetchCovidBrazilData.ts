@@ -48,6 +48,7 @@ export async function fetchCovidStates(): Promise<StateData[]> {
     const response = await api.get("/report/v1");
     return response.data.data.map((state: StateData) => ({
       uf: state.uf,
+      state: state.state,
       cases: state.cases,
       deaths: state.deaths,
       suspects: state.suspects,
