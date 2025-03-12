@@ -14,7 +14,7 @@ export default async function Home() {
     <main className="">
       <div className="grid gap-4">
         <CovidStatsCard data={data} />
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid lg:grid-cols-2 gap-4">
           <Card>
             <CardHeader>
               <CardTitle className="text-base font-medium">

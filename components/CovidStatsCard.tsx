@@ -45,7 +45,7 @@ export const CovidStatsCard: React.FC<CovidStatsCardProps> = ({ data }) => {
     return (
         <Card>
             <CardHeader>
-                <div className="space-y-5 flex justify-between">
+                <div className="space-y-5 flex flex-wrap gap-x-6 justify-between">
                     <div>
                         <CardTitle className="text-base font-medium">
                             Casos de Covid no Brasil
@@ -91,7 +91,7 @@ export const CovidStatsCard: React.FC<CovidStatsCardProps> = ({ data }) => {
                 </div>
             </CardHeader>
             <CardContent>
-                <div className="flex gap-8 justify-between">
+                <div className="grid md:grid-cols-3 gap-8 justify-between">
                     <div>
                         <div className="flex gap-1.5 items-center">
                             <p className="text-muted-foreground">Casos Confirmados</p>

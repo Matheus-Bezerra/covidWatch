@@ -35,7 +35,6 @@ export default function RootLayout({
 
             <main className="px-6 max-w-[1600px] w-full pb-4">
               {children}
-
             </main>
           </div>
         </ThemeProvider>

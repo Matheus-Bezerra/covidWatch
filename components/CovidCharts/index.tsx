@@ -57,7 +57,7 @@ export const CovidCharts: React.FC = () => {
                 <BarChart
                     data={filteredData.map((state, index) => ({ ...state, key: `${state.uf}-${index}` }))}
                     layout="vertical"
-                    margin={{ top: 20, right: 30, left: 100, bottom: 5 }}
+                    margin={{ top: 20, right: 40, bottom: 5 }}
                 >
                     <XAxis type="number" scale="log" domain={['auto', 'auto']} />
                     <YAxis dataKey="uf" type="category" width={100} />
