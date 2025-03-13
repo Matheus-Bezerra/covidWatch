@@ -1,6 +1,8 @@
 ## Covid Watch
 
 Uma aplicação projetada para monitorar os casos de Covid-19 no Brasil e no mundo, permitindo que os usuários acompanhem as estatísticas de casos confirmados, mortes e recuperações.
+<br>
+Link da Produção: <a href="https://covid-watch.vercel.app/">https://covid-watch.vercel.app/</a> 
 
 ### Para rodar o projeto:
 
