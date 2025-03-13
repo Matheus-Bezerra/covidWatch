@@ -31,7 +31,7 @@ export const CovidStatsCard: React.FC<CovidStatsCardProps> = ({ data }) => {
                         </CardTitle>
                         <CardDescription>Acompanhe os casos da pandemia no país.</CardDescription>
                     </div>
-                    <div className="flex gap-1">
+                    <div className="flex flex-wrap gap-1">
                         {/* Popover que abre o calendário para selecionar a data */}
                         <Popover>
                             <PopoverTrigger asChild>
