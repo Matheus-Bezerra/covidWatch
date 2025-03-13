@@ -10,15 +10,16 @@ import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Image from "next/image";
 import { StatesData } from "@/lib/services/statesService";
+import { toast } from 'react-toastify';
 
 const formSchema = z.object({
     name: z.string({ message: "Campo Obrigatório" }).min(2, { message: "Nome é obrigatório" }),
     state: z.string({ message: "Campo Obrigatório" }).nonempty({ message: "Estado é obrigatório" }),
-    cases: z.number({ message: "Campo Obrigatório" }).min(1, { message: "Casos é obrigatório" }),
-    confirmed: z.number({ message: "Campo Obrigatório" }).min(1, { message: "Confirmados é obrigatório" }),
-    deaths: z.number({ message: "Campo Obrigatório" }).min(1, { message: "Mortos é obrigatório" }),
-    recovered: z.number({ message: "Campo Obrigatório" }).min(1, { message: "Recuperados é obrigatório" }),
-    date: z.string({ message: "Campo Obrigatório" }).nonempty({ message: "Data é obrigatória" }),
+    cases: z.number({ message: "Campo Obrigatório" }),
+    confirmed: z.number({ message: "Campo Obrigatório" }),
+    deaths: z.number({ message: "Campo Obrigatório" }),
+    recovered: z.number({ message: "Campo Obrigatório" }),
+    date: z.string({ message: "Campo Obrigatório" }).nonempty({ message: "Data é obrigatória" })
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -27,13 +28,37 @@ interface FormRegisterCasesCovidProps {
     states: StatesData[] | null;
 }
 
+const valuesDefaultRegisterCaseCovid : FormData = {
+    name: "",
+    state: "",
+    cases: 0,
+    confirmed: 0,
+    deaths: 0,
+    recovered: 0,
+    date: "",
+}
+
 export const FormRegisterCasesCovid: React.FC<FormRegisterCasesCovidProps> = ({ states }) => {
     const form = useForm<FormData>({
         resolver: zodResolver(formSchema),
+        defaultValues: valuesDefaultRegisterCaseCovid
     });
 
     const onSubmit: SubmitHandler<FormData> = data => {
-        alert(`Form data: ${JSON.stringify(data, null, 2)}`);
+        console.log("Dataaa ", data)
+        // Em caso de Api, exemplo:
+        /* api.post('/registerCase', data) */
+        form.reset(valuesDefaultRegisterCaseCovid);
+        toast.success('Dados enviados com sucesso!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light"
+        });
     };
 
     return (
@@ -55,7 +80,7 @@ export const FormRegisterCasesCovid: React.FC<FormRegisterCasesCovidProps> = ({ 
                                     <FormItem className="md:col-span-2">
                                         <FormLabel>Nome</FormLabel>
                                         <FormControl>
-                                            <Input {...field} />
+                                            <Input type="text" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>

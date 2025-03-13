@@ -20,7 +20,7 @@ export default async function Home() {
             <CardDescription>Acompanhe a situação da pandemia em cada estado Brasileiro</CardDescription>
           </CardHeader>
           <CardContent>
-            <CovidCharts />
+            <CovidCharts className="h-96" />
           </CardContent>
         </Card>
         <Card>

@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const inter = Inter({
   variable: "--font-inter",
@@ -38,6 +40,7 @@ export default function RootLayout({
             </main>
           </div>
         </ThemeProvider>
+        <ToastContainer />
       </body>
     </html >
   );

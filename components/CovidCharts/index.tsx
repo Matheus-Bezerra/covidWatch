@@ -22,7 +22,11 @@ const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameT
     return null;
 };
 
-export const CovidCharts: React.FC = () => {
+interface CovidChartsProps {
+    className?: string;
+}
+
+export const CovidCharts: React.FC<CovidChartsProps> = ({ className }) => {
     const [statesData, setStatesData] = useState<CovidStateData[]>([]);
     const [filteredData, setFilteredData] = useState<CovidStateData[]>([]);
     const [searchQuery, setSearchQuery] = useState<string>("");
@@ -46,7 +50,7 @@ export const CovidCharts: React.FC = () => {
     }, [searchQuery, statesData]);
 
     return (
-        <div className="w-full h-96 overflow-y-auto pr-3">
+        <div className={`w-full overflow-y-auto pr-3 ${className}`}>
             <Input
                 placeholder="Procurar estado por sigla ou nome"
                 value={searchQuery}
@@ -61,7 +65,7 @@ export const CovidCharts: React.FC = () => {
                 >
                     <XAxis type="number" scale="log" domain={['auto', 'auto']} />
                     <YAxis dataKey="uf" type="category" width={100} />
-                    <Tooltip content={<CustomTooltip />} cursor={false} /> {/* Disable cursor background fill */}
+                    <Tooltip content={<CustomTooltip />} cursor={false} />
                     <Bar dataKey="cases" fill="#22c55e" name="Casos Confirmados" radius={[6, 6, 6, 6]} />
                     <Bar dataKey="deaths" fill="#ef4444" name="Mortes" radius={[6, 6, 6, 6]} />
                     <Bar dataKey="suspects" fill="#eab308" name="Casos Suspeitos" radius={[6, 6, 6, 6]} />

@@ -19,7 +19,7 @@ const RegistrarPage = async () => {
                         <CardDescription>Acompanhe a situação da pandemia em cada estado Brasileiro</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <CovidCharts />
+                        <CovidCharts className='h-86' />
                     </CardContent>
                 </Card>
             </div>
