@@ -12,6 +12,7 @@ import Image from "next/image";
 import { StatesData } from "@/lib/services/statesService";
 import { toast } from 'react-toastify';
 
+// Schema de validação dos campos do formulário
 const formSchema = z.object({
     name: z.string({ message: "Campo Obrigatório" }).min(2, { message: "Nome é obrigatório" }),
     state: z.string({ message: "Campo Obrigatório" }).nonempty({ message: "Estado é obrigatório" }),
@@ -22,6 +23,7 @@ const formSchema = z.object({
     date: z.string({ message: "Campo Obrigatório" }).nonempty({ message: "Data é obrigatória" })
 });
 
+// Tipo de dados do Formulário
 type FormData = z.infer<typeof formSchema>;
 
 interface FormRegisterCasesCovidProps {
@@ -39,6 +41,7 @@ const valuesDefaultRegisterCaseCovid : FormData = {
 }
 
 export const FormRegisterCasesCovid: React.FC<FormRegisterCasesCovidProps> = ({ states }) => {
+    // Hook do formulário usando React Hook Form
     const form = useForm<FormData>({
         resolver: zodResolver(formSchema),
         defaultValues: valuesDefaultRegisterCaseCovid

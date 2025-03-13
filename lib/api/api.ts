@@ -1,4 +1,3 @@
-// lib/api.ts
 import axios from "axios";
 
 // Geralmente fica em um arquivo ENV, mas como é um projeto com api pública resolvi deixar aqui

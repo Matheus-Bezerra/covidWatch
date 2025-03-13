@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// Tipagem dos dados de estados
 export interface StatesData {
     uf: string;
     name: string;
@@ -9,6 +10,7 @@ export interface StatesData {
     flag_url_circle: string
 }
 
+// Função para buscar os dados dos estados do Brasil
 export async function fetchGetStatesBrazil(): Promise<StatesData[] | null> {
   try {
     const response = await axios.get("https://apis.codante.io/bandeiras-dos-estados");

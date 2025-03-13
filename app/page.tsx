@@ -10,6 +10,7 @@ export default async function Home() {
 
   return (
     <div className="grid gap-4">
+      {/* Seção de estatisticas do Covid no Brasil */}
       <CovidStatsCard data={data} />
       <div className="grid lg:grid-cols-2 gap-4">
         <Card>
@@ -20,6 +21,7 @@ export default async function Home() {
             <CardDescription>Acompanhe a situação da pandemia em cada estado Brasileiro</CardDescription>
           </CardHeader>
           <CardContent>
+            {/* Seção que mostra os gráficos dos casos de Covid em cada estado do Brasil */}
             <CovidCharts className="h-96" />
           </CardContent>
         </Card>
@@ -31,6 +33,7 @@ export default async function Home() {
             <CardDescription>Acompanhe a situação da pandemia em diferentes países</CardDescription>
           </CardHeader>
           <CardContent>
+            {/* Seção que mostra os casos de Covid em diferentes países */}
             <DataTableCountries data={countriesData} />
           </CardContent>
         </Card>

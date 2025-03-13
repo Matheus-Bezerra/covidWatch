@@ -5,6 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+// Formatar número para exibição no padrão pt-BR
 export const formatNumber = (number: number | null) => {
   if (number === null || number === undefined) {
     return "-";

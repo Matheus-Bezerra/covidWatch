@@ -89,6 +89,7 @@ export const columns: ColumnDef<CountryData>[] = [
     },
 ];
 
+// Tradução das Keys das colunas para Português
 const columnLabels: { [key: string]: string } = {
     country: "Países",
     confirmed: "Casos Confirmados",

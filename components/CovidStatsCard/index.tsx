@@ -18,6 +18,7 @@ interface CovidStatsCardProps {
 }
 
 export const CovidStatsCard: React.FC<CovidStatsCardProps> = ({ data }) => {
+    // Hook que gerencia os dados do Covid do Brasil de acordo com a data ou sem a data
     const { date, covidData, handleDateChange } = useCovidData(data);
 
     return (
@@ -31,6 +32,7 @@ export const CovidStatsCard: React.FC<CovidStatsCardProps> = ({ data }) => {
                         <CardDescription>Acompanhe os casos da pandemia no país.</CardDescription>
                     </div>
                     <div className="flex gap-1">
+                        {/* Popover que abre o calendário para selecionar a data */}
                         <Popover>
                             <PopoverTrigger asChild>
                                 <Button
@@ -55,6 +57,7 @@ export const CovidStatsCard: React.FC<CovidStatsCardProps> = ({ data }) => {
                                 />
                             </PopoverContent>
                         </Popover>
+                        {/* Botão para limpar a data, junto com o tooltip que aparece quando passa o mouse sobre o botão */}
                         <TooltipProvider>
                             <Tooltip>
                                 <TooltipTrigger asChild>

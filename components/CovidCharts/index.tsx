@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { ValueType, NameType } from 'recharts/types/component/DefaultTooltipContent';
 import { fetchCovidStates, CovidStateData } from "@/lib/services/covidService";
 
+// Quadrado que aparece quando você passa o mouse sobre as barras do gráfico
 const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>) => {
     if (active && payload && payload.length) {
         return (
@@ -31,6 +32,7 @@ export const CovidCharts: React.FC<CovidChartsProps> = ({ className }) => {
     const [filteredData, setFilteredData] = useState<CovidStateData[]>([]);
     const [searchQuery, setSearchQuery] = useState<string>("");
 
+    // Busca os dados dos estados do Brasil
     useEffect(() => {
         const fetchData = async () => {
             const data = await fetchCovidStates();
@@ -40,6 +42,7 @@ export const CovidCharts: React.FC<CovidChartsProps> = ({ className }) => {
         fetchData();
     }, []);
 
+    // Filtra os estados de acordo com a busca no campo
     useEffect(() => {
         const trimmedQuery = searchQuery.trim().toLowerCase();
         const filtered = statesData.filter(state =>

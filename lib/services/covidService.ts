@@ -1,11 +1,13 @@
 import { api } from "@/lib/api/api";
 
+// Tipagem da estatisticas do Covid em relação ao Brasil
 export interface CovidData {
   confirmed: number | null;
   deaths: number | null;
   recovered: number | null;
 }
 
+// Tipagem dos dados de Covid por estado
 export interface CovidStateData {
   uid: number;
   uf: string;
@@ -17,18 +19,20 @@ export interface CovidStateData {
   datetime: string;
 }
 
+// Tipagem dos dados de Covid por país
 export interface CountryData {
-    country: string;
-    confirmed: number;
-    deaths: number;
-    suspects: number;
-  }
+  country: string;
+  confirmed: number;
+  deaths: number;
+  suspects: number;
+}
 
-  
+// Tipagem da resposta da API de Covid por país
 interface ApiCovidCountryResponse {
-    data: CountryData[];
-  }
+  data: CountryData[];
+}
 
+// Função para buscar os dados de Covid no Brasil
 export async function fetchCovidData(): Promise<CovidData | null> {
   try {
     const response = await api.get("report/v1/brazil");
@@ -39,6 +43,7 @@ export async function fetchCovidData(): Promise<CovidData | null> {
   }
 }
 
+// Função para buscar os dados de Covid no Brasil em relação a uma data específica
 export async function fetchCovidDataWithDate(date: string): Promise<CovidData | null> {
   try {
     const response = await api.get(`report/v1/brazil/${date}`);
@@ -55,6 +60,7 @@ export async function fetchCovidDataWithDate(date: string): Promise<CovidData | 
   }
 }
 
+// Função para buscar os dados de Covid por estado
 export async function fetchCovidStates(): Promise<CovidStateData[]> {
   try {
     const response = await api.get("/report/v1");
@@ -70,19 +76,19 @@ export async function fetchCovidStates(): Promise<CovidStateData[]> {
     return [];
   }
 }
-  
-  export async function fetchCovidCountriesData(): Promise<CountryData[]> {
-    try {
-      const response = await api.get<ApiCovidCountryResponse>("report/v1/countries");
-      return response.data.data.map((country) => ({
-        country: country.country,
-        confirmed: country.confirmed,
-        deaths: country.deaths,
-        suspects: country.suspects,
-      }));
-    } catch (error) {
-      console.error("Erro ao buscar dados da API:", error);
-      return [];
-    }
+
+// Função para buscar os dados de Covid por país
+export async function fetchCovidCountriesData(): Promise<CountryData[]> {
+  try {
+    const response = await api.get<ApiCovidCountryResponse>("report/v1/countries");
+    return response.data.data.map((country) => ({
+      country: country.country,
+      confirmed: country.confirmed,
+      deaths: country.deaths,
+      suspects: country.suspects,
+    }));
+  } catch (error) {
+    console.error("Erro ao buscar dados da API:", error);
+    return [];
   }
-  
+}
