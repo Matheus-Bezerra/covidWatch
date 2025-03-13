@@ -12,7 +12,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "CovidWtach | Início",
+  title: "CovidWtach",
   description: "Monitoramento de casos de Covid-19",
 };
 
