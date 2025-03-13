@@ -15,9 +15,15 @@ npm run dev
 
 Abrir [http://localhost:3000](http://localhost:3000) para visualizar o front end
 
-<hr><br>
+<hr>
 
-<!-- Vídeo GIF (Em breve) -->
+### Gif mostrando tela inicial
+<img src="./assets/covidWatch-inicio.gif" alt="Gif mostrando tela inicial">
+
+### Gif mostrando tela de registrar caso + responsividade
+<img src="./assets/covidWatch-inicio.gif" alt="Gif mostrando tela inicial">
+
+<hr>
 
 ## Tecnologias
 
