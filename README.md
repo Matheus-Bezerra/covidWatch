@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Covid Watch
 
-## Getting Started
+Uma aplicação projetada para monitorar os casos de Covid-19 no Brasil e no mundo, permitindo que os usuários acompanhem as estatísticas de casos confirmados, mortes e recuperações.
 
-First, run the development server:
+### Para rodar o projeto:
 
-```bash
+```javascript
+npm i -f
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+// Obs: Usei -f no npm i devido ao estar usando React 19 e Next 15 junto do Shadcn que ainda não está 100% otimizado para essa versão do React, ele recomenda em alguns componentes usar o -f
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrir [http://localhost:3000](http://localhost:3000) para visualizar o front end
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<hr><br>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+<!-- Vídeo GIF (Em breve) -->
 
-## Learn More
+## Tecnologias
 
-To learn more about Next.js, take a look at the following resources:
+O projeto foi desenvolvido com as seguintes tecnologias:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Front End:
+- Next
+- React
+- Typescript
+- Shadcn
+- Tailwind
+- Axios
+- React Hook Form
+- Zod
+- Radix UI
+- React Toastify
+- Recharts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Linkedin de Matheus Bezerra --> <a href="https://www.linkedin.com/in/matheus-bezerra04/">Matheus-Bezerra04</a> <br />
+E-mail: <a  href="malito:matheusbwzerra002@gmail.com">matheusbwzerra002@gmail.com</a>
+<br />
+Contato -> (11) 97661-1929
