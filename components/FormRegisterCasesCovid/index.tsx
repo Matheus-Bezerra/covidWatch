@@ -48,6 +48,7 @@ export const FormRegisterCasesCovid: React.FC<FormRegisterCasesCovidProps> = ({ 
     });
 
     const onSubmit: SubmitHandler<FormData> = data => {
+        console.log("Dataaa ", data)
         // Em caso de Api, exemplo:
         /* api.post('/registerCase', data) */
         form.reset(valuesDefaultRegisterCaseCovid);
