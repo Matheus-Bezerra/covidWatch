@@ -16,10 +16,10 @@ import { toast } from 'react-toastify';
 const formSchema = z.object({
     name: z.string({ message: "Campo Obrigatório" }).min(2, { message: "Nome é obrigatório" }),
     state: z.string({ message: "Campo Obrigatório" }).nonempty({ message: "Estado é obrigatório" }),
-    cases: z.number({ message: "Campo Obrigatório" }),
-    confirmed: z.number({ message: "Campo Obrigatório" }),
-    deaths: z.number({ message: "Campo Obrigatório" }),
-    recovered: z.number({ message: "Campo Obrigatório" }),
+    cases: z.string({ message: "Campo Obrigatório" }),
+    confirmed: z.string({ message: "Campo Obrigatório" }),
+    deaths: z.string({ message: "Campo Obrigatório" }),
+    recovered: z.string({ message: "Campo Obrigatório" }),
     date: z.string({ message: "Campo Obrigatório" }).nonempty({ message: "Data é obrigatória" })
 });
 
@@ -33,10 +33,10 @@ interface FormRegisterCasesCovidProps {
 const valuesDefaultRegisterCaseCovid : FormData = {
     name: "",
     state: "",
-    cases: 0,
-    confirmed: 0,
-    deaths: 0,
-    recovered: 0,
+    cases: "0",
+    confirmed: "0",
+    deaths: "0",
+    recovered: "0",
     date: "",
 }
 
